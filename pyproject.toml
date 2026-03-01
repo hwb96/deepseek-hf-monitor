@@ -1,7 +1,7 @@
 [project]
 name = "deepseek-hf-monitor"
 version = "0.1.0"
-description = "Monitor new models under a Hugging Face org (default: deepseek-ai)."
+description = "一键监控 DeepSeek 是否发新模型。Hugging Face 模型更新监控工具，支持多组织订阅、邮件实时告警、Docker 一键部署。"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [

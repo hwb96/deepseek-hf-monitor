@@ -4,8 +4,7 @@
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 ![uv](https://img.shields.io/badge/Package%20Manager-uv-7c3aed)
 
-自动监控 Hugging Face 组织是否发布新模型（默认 `deepseek-ai`）。
-检测到新增模型后，可自动发送邮件通知。
+一键监控 DeepSeek 是否发新模型。这是一款 Hugging Face 模型更新监控工具，支持多组织订阅、邮件实时告警、Docker 一键部署。
 
 ## Features
 
