@@ -1,0 +1,25 @@
+name: deepseek-hf-monitor
+
+services:
+  monitor:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: deepseek-hf-monitor
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - TZ=Asia/Shanghai
+    volumes:
+      - ./state:/app/state
+      - ./logs:/app/logs
+      - ./.env:/app/.env:ro
+      # Optional: mount external env file, then set EXTERNAL_ENV_FILE=/run/external/external.env in .env
+      # - /path/to/external.env:/run/external/external.env:ro
+    healthcheck:
+      test: ["CMD", "uv", "run", "--no-dev", "deepseek-monitor-healthcheck"]
+      interval: 60s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
