@@ -44,6 +44,38 @@ uv run deepseek-monitor
 uv run deepseek-monitor --loop --interval-seconds 1800
 ```
 
+## 监控间隔怎么改
+
+你可以用两种方式控制监控间隔（单位：秒）：
+
+1. 在 `.env` 里改（推荐长期运行）
+
+```bash
+CHECK_INTERVAL_SECONDS=1800
+```
+
+2. 启动时通过 CLI 覆盖（临时调试）
+
+```bash
+uv run deepseek-monitor --loop --interval-seconds 1800
+```
+
+如果你使用 Docker Compose，通常只需要修改项目根目录 `.env` 里的 `CHECK_INTERVAL_SECONDS`，然后重启容器即可：
+
+```bash
+docker compose up -d
+```
+
+### 间隔大小的优缺点
+
+| 间隔 | 优点 | 缺点 | 适用场景 |
+|---|---|---|---|
+| `300`（5 分钟） | 发现更及时 | 请求更频繁，网络/API 波动时更容易触发失败重试 | 需要尽快知道新模型 |
+| `1800`（30 分钟，默认） | 时效和稳定性平衡 | 比 5 分钟有更长延迟 | 大多数个人/团队日常监控 |
+| `3600`（60 分钟） | 资源占用更低，最稳 | 最晚可能延迟 1 小时才发现 | 对实时性要求不高 |
+
+建议：先用默认 `1800`，如果你非常在意时效再改到 `300`。
+
 ## Docker Compose
 
 ```bash
